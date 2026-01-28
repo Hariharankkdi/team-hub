@@ -199,15 +199,15 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
                   </div>
                 </div>
               ) : (
-                <div className="w-full">
+                <div className="w-full self-start">
                   <h3 className="text-sm font-medium text-foreground mb-4">Recently Visited</h3>
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2">
                     {recentlyVisited.map((org) => (
                       <button
                         key={org}
                         onClick={() => setSelectedChildOrg(org)}
                         className={cn(
-                          "text-left text-sm py-1 transition-colors hover:text-foreground",
+                          "text-left text-sm py-1.5 transition-colors hover:text-foreground",
                           selectedChildOrg === org ? "font-medium text-foreground" : "text-foreground"
                         )}
                       >
