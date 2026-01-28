@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Organization } from "@/types/organization";
 import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
+import { Search, ChevronRight } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ChangeOrgDialogProps {
   open: boolean;
@@ -26,22 +27,37 @@ const allOrganizations = [
   { id: "9", name: "Aperture Science", logo: "Kt" },
 ];
 
-const recentlyVisitedOrgs = ["Global Relations", "Finance Division", "HR Department"];
+const childOrganizations = [
+  "Marketing Group", "Data Analytics", "Global Relations",
+  "Finance Division", "Design Team", "Brand Management",
+  "HR Department", "QA Department", "Content Creation",
+  "Legal Team", "Cloud Services", "Social Media Team",
+  "Sales Division", "Mobile Development", "Public Relations",
+  "Engineering Team", "Technical Support", "Internal Communications",
+  "Research Group", "Innovation Lab", "Board of Directors",
+  "Customer Service", "Product Management", "Investor Relations",
+  "IT Department", "Training Department", "Executive Office",
+  "Security Team", "Partnerships Team", "Advisory Board",
+];
 
 export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg, onSelectOrg }: ChangeOrgDialogProps) {
   const [parentSearch, setParentSearch] = useState("");
-  const [recentSearch, setRecentSearch] = useState("");
-  const [selectedOrg, setSelectedOrg] = useState<string | null>(currentOrg.id);
+  const [childSearch, setChildSearch] = useState("");
+  const [selectedParentOrg, setSelectedParentOrg] = useState<string | null>(null);
+  const [selectedChildOrg, setSelectedChildOrg] = useState<string | null>(null);
 
   const filteredOrgs = allOrganizations.filter((org) => org.name.toLowerCase().includes(parentSearch.toLowerCase()));
 
-  const filteredRecentOrgs = recentlyVisitedOrgs.filter((org) =>
-    org.toLowerCase().includes(recentSearch.toLowerCase()),
+  const filteredChildOrgs = childOrganizations.filter((org) =>
+    org.toLowerCase().includes(childSearch.toLowerCase()),
   );
 
+  const selectedParent = allOrganizations.find((org) => org.id === selectedParentOrg);
+
   const handleSave = () => {
-    if (selectedOrg) {
-      const org = organizations.find((o) => o.id === selectedOrg);
+    if (selectedChildOrg) {
+      // Find the org from organizations prop or create a mock one
+      const org = organizations.find((o) => o.name === selectedChildOrg);
       if (org) {
         onSelectOrg(org);
       }
@@ -49,16 +65,22 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
     onOpenChange(false);
   };
 
+  const handleParentClick = (orgId: string) => {
+    setSelectedParentOrg(orgId);
+    setSelectedChildOrg(null);
+    setChildSearch("");
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-4xl p-0">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b">
+        <DialogHeader className="px-6 pt-6 pb-4">
           <DialogTitle className="text-lg font-semibold">Change Organization</DialogTitle>
         </DialogHeader>
 
-        <div className="flex min-h-[500px]">
+        <div className="flex min-h-[420px]">
           {/* Left Panel - Parent Organizations */}
-          <div className="w-80 border-r flex flex-col">
+          <div className="w-72 border-r flex flex-col">
             <div className="p-4">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -71,14 +93,14 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto">
+            <ScrollArea className="flex-1">
               {filteredOrgs.map((org) => (
                 <button
                   key={org.id}
-                  onClick={() => setSelectedOrg(org.id)}
+                  onClick={() => handleParentClick(org.id)}
                   className={cn(
                     "w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50",
-                    selectedOrg === org.id && "bg-muted/50",
+                    selectedParentOrg === org.id && "bg-muted/50",
                   )}
                 >
                   <div className="w-8 h-8 rounded bg-[#E5F530] text-black flex items-center justify-center font-bold text-xs">
@@ -87,34 +109,52 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
                   <span className="text-sm font-medium">{org.name}</span>
                 </button>
               ))}
-            </div>
+            </ScrollArea>
           </div>
 
-          {/* Right Panel - Recently Visited */}
+          {/* Right Panel - Child Organizations */}
           <div className="flex-1 flex flex-col">
-            <div className="p-4 flex items-center justify-between gap-4">
-              <h3 className="text-base font-medium text-muted-foreground">Recently visited Org</h3>
-              <div className="relative flex-1 max-w-xs">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search"
-                  value={recentSearch}
-                  onChange={(e) => setRecentSearch(e.target.value)}
-                  className="pl-9 bg-muted/50 border-0"
-                />
-              </div>
-            </div>
+            {selectedParentOrg ? (
+              <>
+                <div className="p-4 flex items-center justify-between gap-4 border-b">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="text-foreground underline">{selectedParent?.name}</span>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-muted-foreground">SI_Sales Team</span>
+                  </div>
+                  <div className="relative w-64">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      placeholder="Search Child Organizations"
+                      value={childSearch}
+                      onChange={(e) => setChildSearch(e.target.value)}
+                      className="pl-9 bg-muted/50 border-0"
+                    />
+                  </div>
+                </div>
 
-            <div className="px-4 pb-4 flex flex-wrap gap-2">
-              {filteredRecentOrgs.map((org) => (
-                <button
-                  key={org}
-                  className="px-4 py-2 text-sm text-muted-foreground hover:bg-muted/50 rounded transition-colors"
-                >
-                  {org}
-                </button>
-              ))}
-            </div>
+                <ScrollArea className="flex-1 p-4">
+                  <div className="grid grid-cols-3 gap-x-8 gap-y-3">
+                    {filteredChildOrgs.map((org) => (
+                      <button
+                        key={org}
+                        onClick={() => setSelectedChildOrg(org)}
+                        className={cn(
+                          "text-left text-sm py-1.5 px-2 rounded transition-colors hover:bg-muted/50",
+                          selectedChildOrg === org && "bg-muted/50 font-medium"
+                        )}
+                      >
+                        {org}
+                      </button>
+                    ))}
+                  </div>
+                </ScrollArea>
+              </>
+            ) : (
+              <div className="flex-1 flex items-center justify-center text-muted-foreground text-sm">
+                Select a parent organization to view child organizations
+              </div>
+            )}
           </div>
         </div>
 
