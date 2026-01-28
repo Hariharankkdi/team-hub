@@ -40,6 +40,11 @@ const childOrganizations = [
   "Security Team", "Partnerships Team", "Advisory Board",
 ];
 
+const recentlyVisited = [
+  "SI_Sales Team", "SI_Data Analytics", "SI_Marketing Group",
+  "SI_Design Team", "SI_Cloud Services", "SI_Engineering Team",
+];
+
 export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg, onSelectOrg }: ChangeOrgDialogProps) {
   const [parentSearch, setParentSearch] = useState("");
   const [childSearch, setChildSearch] = useState("");
@@ -194,7 +199,23 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
                   </div>
                 </div>
               ) : (
-                <span className="text-muted-foreground text-sm">Select a parent organization to view children</span>
+                <div className="w-full">
+                  <h3 className="text-sm font-medium text-foreground mb-4">Recently Visited</h3>
+                  <div className="flex flex-col gap-3">
+                    {recentlyVisited.map((org) => (
+                      <button
+                        key={org}
+                        onClick={() => setSelectedChildOrg(org)}
+                        className={cn(
+                          "text-left text-sm py-1 transition-colors hover:text-foreground",
+                          selectedChildOrg === org ? "font-medium text-foreground" : "text-foreground"
+                        )}
+                      >
+                        {org}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
           </div>
