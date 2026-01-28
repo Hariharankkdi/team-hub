@@ -56,7 +56,7 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
           <DialogTitle className="text-lg font-semibold">Change Organization</DialogTitle>
         </DialogHeader>
 
-        <div className="flex min-h-[80px]">
+        <div className="flex min-h-[500px]">
           {/* Left Panel - Parent Organizations */}
           <div className="w-80 border-r flex flex-col">
             <div className="p-4">
