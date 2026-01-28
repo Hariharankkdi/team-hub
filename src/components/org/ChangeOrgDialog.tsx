@@ -1,15 +1,10 @@
-import { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Organization } from '@/types/organization';
-import { cn } from '@/lib/utils';
-import { Search } from 'lucide-react';
+import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Organization } from "@/types/organization";
+import { cn } from "@/lib/utils";
+import { Search } from "lucide-react";
 
 interface ChangeOrgDialogProps {
   open: boolean;
@@ -20,41 +15,33 @@ interface ChangeOrgDialogProps {
 }
 
 const allOrganizations = [
-  { id: '1', name: 'Katana Admin', logo: 'Kt' },
-  { id: '2', name: 'Globex Corporation', logo: 'Kt' },
-  { id: '3', name: 'Initech', logo: 'Kt' },
-  { id: '4', name: 'Stark Industries', logo: 'Kt' },
-  { id: '5', name: 'Wayne Enterprises', logo: 'Kt' },
-  { id: '6', name: 'Cyberdyne Systems', logo: 'Kt' },
-  { id: '7', name: 'Oscorp', logo: 'Kt' },
-  { id: '8', name: 'Umbrella Corporation', logo: 'Kt' },
-  { id: '9', name: 'Aperture Science', logo: 'Kt' },
+  { id: "1", name: "Katana Admin", logo: "Kt" },
+  { id: "2", name: "Globex Corporation", logo: "Kt" },
+  { id: "3", name: "Initech", logo: "Kt" },
+  { id: "4", name: "Stark Industries", logo: "Kt" },
+  { id: "5", name: "Wayne Enterprises", logo: "Kt" },
+  { id: "6", name: "Cyberdyne Systems", logo: "Kt" },
+  { id: "7", name: "Oscorp", logo: "Kt" },
+  { id: "8", name: "Umbrella Corporation", logo: "Kt" },
+  { id: "9", name: "Aperture Science", logo: "Kt" },
 ];
 
-const recentlyVisitedOrgs = ['Global Relations', 'Finance Division', 'HR Department'];
+const recentlyVisitedOrgs = ["Global Relations", "Finance Division", "HR Department"];
 
-export function ChangeOrgDialog({
-  open,
-  onOpenChange,
-  organizations,
-  currentOrg,
-  onSelectOrg,
-}: ChangeOrgDialogProps) {
-  const [parentSearch, setParentSearch] = useState('');
-  const [recentSearch, setRecentSearch] = useState('');
+export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg, onSelectOrg }: ChangeOrgDialogProps) {
+  const [parentSearch, setParentSearch] = useState("");
+  const [recentSearch, setRecentSearch] = useState("");
   const [selectedOrg, setSelectedOrg] = useState<string | null>(currentOrg.id);
 
-  const filteredOrgs = allOrganizations.filter(org =>
-    org.name.toLowerCase().includes(parentSearch.toLowerCase())
-  );
+  const filteredOrgs = allOrganizations.filter((org) => org.name.toLowerCase().includes(parentSearch.toLowerCase()));
 
-  const filteredRecentOrgs = recentlyVisitedOrgs.filter(org =>
-    org.toLowerCase().includes(recentSearch.toLowerCase())
+  const filteredRecentOrgs = recentlyVisitedOrgs.filter((org) =>
+    org.toLowerCase().includes(recentSearch.toLowerCase()),
   );
 
   const handleSave = () => {
     if (selectedOrg) {
-      const org = organizations.find(o => o.id === selectedOrg);
+      const org = organizations.find((o) => o.id === selectedOrg);
       if (org) {
         onSelectOrg(org);
       }
@@ -68,8 +55,8 @@ export function ChangeOrgDialog({
         <DialogHeader className="px-6 pt-6 pb-4 border-b">
           <DialogTitle className="text-lg font-semibold">Change Organization</DialogTitle>
         </DialogHeader>
-        
-        <div className="flex min-h-[380px]">
+
+        <div className="flex min-h-[80px]">
           {/* Left Panel - Parent Organizations */}
           <div className="w-80 border-r flex flex-col">
             <div className="p-4">
@@ -83,15 +70,15 @@ export function ChangeOrgDialog({
                 />
               </div>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto">
               {filteredOrgs.map((org) => (
                 <button
                   key={org.id}
                   onClick={() => setSelectedOrg(org.id)}
                   className={cn(
-                    'w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50',
-                    selectedOrg === org.id && 'bg-muted/50'
+                    "w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50",
+                    selectedOrg === org.id && "bg-muted/50",
                   )}
                 >
                   <div className="w-8 h-8 rounded bg-[#E5F530] text-black flex items-center justify-center font-bold text-xs">
@@ -117,7 +104,7 @@ export function ChangeOrgDialog({
                 />
               </div>
             </div>
-            
+
             <div className="px-4 pb-4 flex flex-wrap gap-2">
               {filteredRecentOrgs.map((org) => (
                 <button
@@ -133,16 +120,10 @@ export function ChangeOrgDialog({
 
         {/* Footer */}
         <div className="flex items-center justify-end gap-3 px-6 py-4 border-t">
-          <Button
-            variant="outline"
-            onClick={() => onOpenChange(false)}
-          >
+          <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
-          <Button
-            onClick={handleSave}
-            className="bg-primary hover:bg-primary/90"
-          >
+          <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
             Save
           </Button>
         </div>
