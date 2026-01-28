@@ -116,7 +116,7 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
           <div className="w-px bg-border" />
 
           {/* Right Panel - Child Organizations */}
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col bg-white">
             <div className="p-4 flex items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-sm">
                 {selectedParent ? (
