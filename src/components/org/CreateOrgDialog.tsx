@@ -16,7 +16,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { ChevronDown } from 'lucide-react';
 
 interface CreateOrgDialogProps {
   open: boolean;
@@ -35,31 +34,6 @@ export interface CreateOrgFormData {
   domain: string;
   location: string;
 }
-
-const industries = [
-  'Technology',
-  'Finance',
-  'Healthcare',
-  'Education',
-  'Retail',
-  'Manufacturing',
-  'Real Estate',
-  'Media',
-  'Other',
-];
-
-const locations = [
-  'San Francisco, CA',
-  'New York, NY',
-  'Los Angeles, CA',
-  'Chicago, IL',
-  'Austin, TX',
-  'Seattle, WA',
-  'Boston, MA',
-  'Denver, CO',
-  'Miami, FL',
-  'Other',
-];
 
 export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialogProps) {
   const [formData, setFormData] = useState<CreateOrgFormData>({
@@ -102,13 +76,13 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[675px] p-0 gap-0">
-        <DialogHeader className="px-6 py-5 border-b">
+        <DialogHeader className="px-10 py-5 border-b">
           <DialogTitle className="text-base font-semibold">Create New Organization</DialogTitle>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="px-6 py-6">
-          <div className="grid grid-cols-2 gap-x-8 gap-y-5">
-            {/* Organization Name */}
+        <form onSubmit={handleSubmit} className="px-10 py-8">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+            {/* Row 1: Organization Name & Phone Number */}
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium text-foreground">
                 Organization Name
@@ -118,19 +92,18 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 value={formData.name}
                 onChange={(e) => updateField('name', e.target.value)}
                 placeholder="Organization Name"
-                className="h-10 border-border"
+                className="h-10 border-border bg-white"
                 required
               />
             </div>
 
-            {/* Phone Number */}
             <div className="space-y-2">
               <Label htmlFor="phoneNumber" className="text-sm font-medium text-foreground">
                 Phone Number
               </Label>
               <div className="flex gap-2">
                 <Select value={countryCode} onValueChange={setCountryCode}>
-                  <SelectTrigger className="w-[80px] h-10">
+                  <SelectTrigger className="w-[72px] h-10 bg-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -145,13 +118,13 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                   id="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={(e) => updateField('phoneNumber', e.target.value)}
-                  placeholder="(555) 123-4567"
-                  className="flex-1 h-10 border-border"
+                  placeholder="Phone Number"
+                  className="flex-1 h-10 border-border bg-white"
                 />
               </div>
             </div>
 
-            {/* Slug */}
+            {/* Row 2: Slug & Domain */}
             <div className="space-y-2">
               <Label htmlFor="slug" className="text-sm font-medium text-foreground">
                 Slug
@@ -160,13 +133,12 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 id="slug"
                 value={formData.slug}
                 onChange={(e) => updateField('slug', e.target.value)}
-                placeholder="organization-slug"
-                className="h-10 border-border"
+                placeholder="Slug"
+                className="h-10 border-border bg-white"
                 required
               />
             </div>
 
-            {/* Domain */}
             <div className="space-y-2">
               <Label htmlFor="domain" className="text-sm font-medium text-foreground">
                 Domain
@@ -175,12 +147,12 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 id="domain"
                 value={formData.domain}
                 onChange={(e) => updateField('domain', e.target.value)}
-                placeholder="example.com"
-                className="h-10 border-border"
+                placeholder="Domain"
+                className="h-10 border-border bg-white"
               />
             </div>
 
-            {/* Description - Full width */}
+            {/* Row 3: Description & Location */}
             <div className="space-y-2">
               <Label htmlFor="description" className="text-sm font-medium text-foreground">
                 Description
@@ -189,13 +161,12 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 id="description"
                 value={formData.description}
                 onChange={(e) => updateField('description', e.target.value)}
-                placeholder="Brief description of your organization"
-                className="min-h-[80px] border-border resize-none"
-                rows={3}
+                placeholder="Description"
+                className="min-h-[100px] border-border resize-none bg-white"
+                rows={4}
               />
             </div>
 
-            {/* Location */}
             <div className="space-y-2">
               <Label htmlFor="location" className="text-sm font-medium text-foreground">
                 Location
@@ -204,20 +175,21 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 value={formData.location}
                 onValueChange={(value) => updateField('location', value)}
               >
-                <SelectTrigger className="h-10">
-                  <SelectValue placeholder="Select location" />
+                <SelectTrigger className="h-10 bg-white">
+                  <SelectValue placeholder="Location" />
                 </SelectTrigger>
                 <SelectContent>
-                  {locations.map((loc) => (
-                    <SelectItem key={loc} value={loc}>
-                      {loc}
-                    </SelectItem>
-                  ))}
+                  <SelectItem value="San Francisco, CA">San Francisco, CA</SelectItem>
+                  <SelectItem value="New York, NY">New York, NY</SelectItem>
+                  <SelectItem value="Los Angeles, CA">Los Angeles, CA</SelectItem>
+                  <SelectItem value="Chicago, IL">Chicago, IL</SelectItem>
+                  <SelectItem value="Austin, TX">Austin, TX</SelectItem>
+                  <SelectItem value="Seattle, WA">Seattle, WA</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            {/* Industry */}
+            {/* Row 4: Industry & Contact Email */}
             <div className="space-y-2">
               <Label htmlFor="industry" className="text-sm font-medium text-foreground">
                 Industry
@@ -226,20 +198,20 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 value={formData.industry}
                 onValueChange={(value) => updateField('industry', value)}
               >
-                <SelectTrigger className="h-10">
-                  <SelectValue placeholder="Select industry" />
+                <SelectTrigger className="h-10 bg-white">
+                  <SelectValue placeholder="Industry" />
                 </SelectTrigger>
                 <SelectContent>
-                  {industries.map((ind) => (
-                    <SelectItem key={ind} value={ind}>
-                      {ind}
-                    </SelectItem>
-                  ))}
+                  <SelectItem value="Technology">Technology</SelectItem>
+                  <SelectItem value="Finance">Finance</SelectItem>
+                  <SelectItem value="Healthcare">Healthcare</SelectItem>
+                  <SelectItem value="Education">Education</SelectItem>
+                  <SelectItem value="Retail">Retail</SelectItem>
+                  <SelectItem value="Manufacturing">Manufacturing</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            {/* Contact Email */}
             <div className="space-y-2">
               <Label htmlFor="contactEmail" className="text-sm font-medium text-foreground">
                 Contact Email
@@ -249,12 +221,12 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 type="email"
                 value={formData.contactEmail}
                 onChange={(e) => updateField('contactEmail', e.target.value)}
-                placeholder="admin@example.com"
-                className="h-10 border-border"
+                placeholder="Contact Email"
+                className="h-10 border-border bg-white"
               />
             </div>
 
-            {/* Tier */}
+            {/* Row 5: Tier */}
             <div className="space-y-2">
               <Label htmlFor="tier" className="text-sm font-medium text-foreground">
                 Tier
@@ -263,8 +235,8 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                 value={formData.tier}
                 onValueChange={(value) => updateField('tier', value)}
               >
-                <SelectTrigger className="h-10">
-                  <SelectValue />
+                <SelectTrigger className="h-10 bg-white">
+                  <SelectValue placeholder="Tier" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Starter">Starter</SelectItem>
@@ -274,23 +246,23 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               </Select>
             </div>
 
-            {/* Empty space to align with grid */}
+            {/* Empty column to maintain grid alignment */}
             <div></div>
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-end gap-3 mt-8 pt-5 border-t">
+          <div className="flex items-center justify-end gap-3 mt-10 pt-5 border-t">
             <Button 
               type="button" 
               variant="outline" 
               onClick={() => onOpenChange(false)}
-              className="px-6"
+              className="px-6 h-10"
             >
               Cancel
             </Button>
             <Button 
               type="submit"
-              className="px-6 bg-primary hover:bg-primary/90"
+              className="px-6 h-10 bg-[#18181B] hover:bg-[#18181B]/90 text-white"
             >
               Create
             </Button>
