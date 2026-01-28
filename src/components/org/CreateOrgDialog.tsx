@@ -60,13 +60,13 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[675px] p-0 gap-0 overflow-hidden">
-        <DialogHeader className="px-10 pt-7 pb-5 border-b border-border">
-          <DialogTitle className="text-base font-semibold text-foreground">
+        <DialogHeader className="px-10 pt-8 pb-6 border-b border-border">
+          <DialogTitle className="text-lg font-semibold text-foreground">
             Create New Organization
           </DialogTitle>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="px-10 pt-8 pb-6">
+        <form onSubmit={handleSubmit} className="px-10 py-8">
           <div className="grid grid-cols-2 gap-x-8 gap-y-6">
             {/* Row 1: Organization Name | Industry */}
             <div className="space-y-2">
@@ -140,7 +140,7 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               </Select>
             </div>
 
-            {/* Row 3: Description (full width via col-span-2) */}
+            {/* Row 3: Description (left column only) */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Description
@@ -154,11 +154,12 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               />
             </div>
 
+            {/* Empty right column */}
             <div></div>
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-end gap-3 mt-10 pt-5 border-t border-border">
+          <div className="flex items-center justify-end gap-3 mt-10 pt-6 border-t border-border">
             <Button 
               type="button" 
               variant="outline" 
