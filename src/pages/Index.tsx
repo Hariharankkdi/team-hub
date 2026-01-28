@@ -83,14 +83,8 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <OrgHeader
-        currentTeam={organizations[1]?.name || 'Team'}
-        onChangeOrg={() => setChangeOrgOpen(true)}
-        onCreateOrg={() => setCreateOrgOpen(true)}
-      />
-
-      <div className="bg-card">
+    <div className="min-h-screen bg-[#F5F5F5] p-8">
+      <div className="bg-card rounded-lg shadow-sm">
         <OrgProfileCard
           organization={currentOrg}
           onToggleEnabled={handleToggleEnabled}

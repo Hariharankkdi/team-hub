@@ -33,17 +33,9 @@ function ProfileField({ label, value, isBadge }: ProfileFieldProps) {
 export function ProfileTab({ organization, onEditProfile }: ProfileTabProps) {
   return (
     <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold">Organization Profile</h3>
-        <Button onClick={onEditProfile} className="gap-2">
-          <Edit className="h-4 w-4" />
-          Edit Profile
-        </Button>
-      </div>
-      
-      <Card>
-        <CardContent className="p-6">
-          <div className="grid grid-cols-2 gap-x-16 gap-y-6">
+      <Card className="border-0 shadow-none">
+        <CardContent className="p-0">
+          <div className="grid grid-cols-2 gap-x-16 gap-y-5">
             <ProfileField label="Name" value={organization.name} />
             <ProfileField label="Slug" value={organization.slug} />
             
