@@ -69,7 +69,7 @@ export function ChangeOrgDialog({
           <DialogTitle className="text-lg font-semibold">Change Organization</DialogTitle>
         </DialogHeader>
         
-        <div className="flex min-h-[500px]">
+        <div className="flex min-h-[380px]">
           {/* Left Panel - Parent Organizations */}
           <div className="w-80 border-r flex flex-col">
             <div className="p-4">
