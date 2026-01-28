@@ -84,7 +84,7 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
         
         <form onSubmit={handleSubmit} className="px-10 pt-8 pb-6">
           <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-            {/* Organization Name */}
+            {/* Row 1: Organization Name | Enter Slug Name (phone) */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Organization Name
@@ -98,10 +98,9 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               />
             </div>
 
-            {/* Phone Number */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
-                Phone Number
+                Enter Slug Name
               </Label>
               <div className="flex gap-2">
                 <Select value={countryCode} onValueChange={setCountryCode}>
@@ -112,20 +111,18 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
                     <SelectItem value="+1">+1</SelectItem>
                     <SelectItem value="+44">+44</SelectItem>
                     <SelectItem value="+91">+91</SelectItem>
-                    <SelectItem value="+86">+86</SelectItem>
-                    <SelectItem value="+81">+81</SelectItem>
                   </SelectContent>
                 </Select>
                 <Input
                   value={formData.phoneNumber}
                   onChange={(e) => updateField('phoneNumber', e.target.value)}
-                  placeholder="Phone Number"
+                  placeholder="Enter Slug Name"
                   className="flex-1 h-10 bg-white border-border"
                 />
               </div>
             </div>
 
-            {/* Slug */}
+            {/* Row 2: Slug | Domain */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Slug
@@ -139,7 +136,6 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               />
             </div>
 
-            {/* Domain */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Domain
@@ -152,7 +148,7 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               />
             </div>
 
-            {/* Description */}
+            {/* Row 3: Description | Location */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Description
@@ -166,7 +162,6 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               />
             </div>
 
-            {/* Location */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Location
@@ -189,7 +184,7 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               </Select>
             </div>
 
-            {/* Industry */}
+            {/* Row 4: Industry | Contact Email */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Industry
@@ -212,7 +207,6 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               </Select>
             </div>
 
-            {/* Contact Email */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Contact Email
@@ -226,7 +220,7 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               />
             </div>
 
-            {/* Tier */}
+            {/* Row 5: Tier | empty */}
             <div className="space-y-2">
               <Label className="text-sm font-medium text-foreground">
                 Tier
@@ -246,7 +240,6 @@ export function CreateOrgDialog({ open, onOpenChange, onCreate }: CreateOrgDialo
               </Select>
             </div>
 
-            {/* Empty cell for grid alignment */}
             <div></div>
           </div>
 
