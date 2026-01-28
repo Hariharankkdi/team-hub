@@ -80,9 +80,9 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
 
         <div className="flex min-h-[480px]">
           {/* Left Panel - Parent Organizations */}
-          <div className="w-72 flex flex-col">
+          <div className="w-72 flex flex-col bg-[#FBFBFB]">
             <div className="p-4">
-              <div className="relative border rounded-md">
+              <div className="relative border rounded-md bg-white">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search Parent Organizations"
@@ -100,7 +100,7 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
                   onClick={() => handleParentClick(org.id)}
                   className={cn(
                     "w-full flex items-center gap-3 px-4 py-3 text-left transition-colors border-y border-border -mt-px first:mt-0",
-                    selectedParentOrg === org.id && "bg-muted/50",
+                    selectedParentOrg === org.id && "bg-[#D4F2DF]",
                   )}
                 >
                   <div className="w-8 h-8 rounded bg-[#E5F530] text-black flex items-center justify-center font-bold text-xs">
@@ -140,8 +140,8 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
               </div>
             </div>
 
-            <ScrollArea className="flex-1 px-4 pb-4">
-              <div className="flex">
+            <div className="flex-1 flex items-center px-4 pb-4">
+              <div className="flex w-full">
                 {/* Column 1 */}
                 <div className="flex-1 flex flex-col gap-4 pr-6">
                   {filteredChildOrgs.filter((_, i) => i % 3 === 0).map((org) => (
@@ -192,7 +192,7 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
                   ))}
                 </div>
               </div>
-            </ScrollArea>
+            </div>
           </div>
         </div>
 
