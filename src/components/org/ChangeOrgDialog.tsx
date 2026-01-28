@@ -61,10 +61,28 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
 
   const handleSave = () => {
     if (selectedChildOrg) {
-      // Find the org from organizations prop or create a mock one
-      const org = organizations.find((o) => o.name === selectedChildOrg);
-      if (org) {
-        onSelectOrg(org);
+      // Find existing org or create a new one based on selection
+      const existingOrg = organizations.find((o) => o.name === selectedChildOrg);
+      if (existingOrg) {
+        onSelectOrg(existingOrg);
+      } else {
+        // Create a new org object for the selected child
+        const newOrg: Organization = {
+          id: Date.now().toString(),
+          name: selectedChildOrg,
+          slug: selectedChildOrg.toLowerCase().replace(/\s+/g, '-'),
+          description: `${selectedChildOrg} organization`,
+          industry: 'General',
+          maxUsers: 50,
+          tier: 'Professional',
+          contactEmail: `contact@${selectedChildOrg.toLowerCase().replace(/\s+/g, '')}.com`,
+          phoneNumber: '+1 (555) 000-0000',
+          domain: `${selectedChildOrg.toLowerCase().replace(/\s+/g, '')}.com`,
+          location: 'San Francisco, CA',
+          enabled: true,
+          logo: selectedChildOrg.substring(0, 2).toUpperCase(),
+        };
+        onSelectOrg(newOrg);
       }
     }
     onOpenChange(false);
