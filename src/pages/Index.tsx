@@ -83,19 +83,26 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] p-8">
-      <div className="bg-card rounded-lg shadow-sm">
-        <OrgProfileCard
-          organization={currentOrg}
-          onToggleEnabled={handleToggleEnabled}
-          onRefresh={handleRefresh}
-          onDelete={handleDelete}
-          onAdd={handleAdd}
-        />
+    <div className="min-h-screen bg-[#F5F5F5]">
+      <OrgHeader 
+        currentTeam={currentOrg.name}
+        onChangeOrg={() => setChangeOrgOpen(true)}
+        onCreateOrg={() => setCreateOrgOpen(true)}
+      />
+      <div className="p-8">
+        <div className="bg-card rounded-lg shadow-sm">
+          <OrgProfileCard
+            organization={currentOrg}
+            onToggleEnabled={handleToggleEnabled}
+            onRefresh={handleRefresh}
+            onDelete={handleDelete}
+            onAdd={handleAdd}
+          />
 
-        <OrgTabs activeTab={activeTab} onTabChange={setActiveTab} />
+          <OrgTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-        {renderTabContent()}
+          {renderTabContent()}
+        </div>
       </div>
 
       <ChangeOrgDialog
