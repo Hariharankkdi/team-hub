@@ -141,19 +141,56 @@ export function ChangeOrgDialog({ open, onOpenChange, organizations, currentOrg,
             </div>
 
             <ScrollArea className="flex-1 px-4 pb-4">
-              <div className="grid grid-cols-3 gap-x-12 gap-y-4">
-                {filteredChildOrgs.map((org) => (
-                  <button
-                    key={org}
-                    onClick={() => setSelectedChildOrg(org)}
-                    className={cn(
-                      "text-left text-sm py-1 transition-colors hover:text-foreground",
-                      selectedChildOrg === org ? "font-medium text-foreground" : "text-foreground"
-                    )}
-                  >
-                    {org}
-                  </button>
-                ))}
+              <div className="flex">
+                {/* Column 1 */}
+                <div className="flex-1 flex flex-col gap-4 pr-6">
+                  {filteredChildOrgs.filter((_, i) => i % 3 === 0).map((org) => (
+                    <button
+                      key={org}
+                      onClick={() => setSelectedChildOrg(org)}
+                      className={cn(
+                        "text-left text-sm py-1 transition-colors hover:text-foreground",
+                        selectedChildOrg === org ? "font-medium text-foreground" : "text-foreground"
+                      )}
+                    >
+                      {org}
+                    </button>
+                  ))}
+                </div>
+                {/* Vertical Line */}
+                <div className="w-px bg-border" />
+                {/* Column 2 */}
+                <div className="flex-1 flex flex-col gap-4 px-6">
+                  {filteredChildOrgs.filter((_, i) => i % 3 === 1).map((org) => (
+                    <button
+                      key={org}
+                      onClick={() => setSelectedChildOrg(org)}
+                      className={cn(
+                        "text-left text-sm py-1 transition-colors hover:text-foreground",
+                        selectedChildOrg === org ? "font-medium text-foreground" : "text-foreground"
+                      )}
+                    >
+                      {org}
+                    </button>
+                  ))}
+                </div>
+                {/* Vertical Line */}
+                <div className="w-px bg-border" />
+                {/* Column 3 */}
+                <div className="flex-1 flex flex-col gap-4 pl-6">
+                  {filteredChildOrgs.filter((_, i) => i % 3 === 2).map((org) => (
+                    <button
+                      key={org}
+                      onClick={() => setSelectedChildOrg(org)}
+                      className={cn(
+                        "text-left text-sm py-1 transition-colors hover:text-foreground",
+                        selectedChildOrg === org ? "font-medium text-foreground" : "text-foreground"
+                      )}
+                    >
+                      {org}
+                    </button>
+                  ))}
+                </div>
               </div>
             </ScrollArea>
           </div>
