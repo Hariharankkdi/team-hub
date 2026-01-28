@@ -46,7 +46,15 @@ const Index = () => {
   const handleCreateOrg = (data: CreateOrgFormData) => {
     const newOrg: Organization = {
       id: Date.now().toString(),
-      ...data,
+      name: data.name,
+      slug: data.slug,
+      description: data.description,
+      industry: data.industry,
+      location: data.location,
+      tier: 'Starter',
+      contactEmail: '',
+      phoneNumber: '',
+      domain: '',
       maxUsers: 10,
       enabled: true,
       logo: data.name.substring(0, 2).toUpperCase(),
