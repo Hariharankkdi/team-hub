@@ -1,6 +1,6 @@
 import { OrgTab } from '@/types/organization';
 import { cn } from '@/lib/utils';
-import { LayoutGrid, Users, FileText, BarChart3, Shield } from 'lucide-react';
+import { LayoutGrid, Users, FileText, BarChart3, Shield, KeyRound } from 'lucide-react';
 
 interface OrgTabsProps {
   activeTab: OrgTab;
@@ -13,6 +13,7 @@ const tabs: { id: OrgTab; label: string; icon: React.ComponentType<{ className?:
   { id: 'reports', label: 'Reports', icon: FileText },
   { id: 'usage', label: 'Usage', icon: BarChart3 },
   { id: 'permissions', label: 'Permissions', icon: Shield },
+  { id: 'authSettings', label: 'Auth Settings', icon: KeyRound },
 ];
 
 export function OrgTabs({ activeTab, onTabChange }: OrgTabsProps) {

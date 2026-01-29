@@ -9,6 +9,7 @@ import { UsersTab } from '@/components/org/UsersTab';
 import { ReportsTab } from '@/components/org/ReportsTab';
 import { UsageTab } from '@/components/org/UsageTab';
 import { PermissionsTab } from '@/components/org/PermissionsTab';
+import { AuthSettingsTab } from '@/components/org/AuthSettingsTab';
 import { ChangeOrgDialog } from '@/components/org/ChangeOrgDialog';
 import { CreateOrgDialog, CreateOrgFormData } from '@/components/org/CreateOrgDialog';
 import { EditProfileDialog } from '@/components/org/EditProfileDialog';
@@ -85,6 +86,8 @@ const Index = () => {
         return <UsageTab />;
       case 'permissions':
         return <PermissionsTab />;
+      case 'authSettings':
+        return <AuthSettingsTab />;
       default:
         return null;
     }
