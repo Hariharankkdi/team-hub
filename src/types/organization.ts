@@ -14,4 +14,4 @@ export interface Organization {
   logo?: string;
 }
 
-export type OrgTab = 'profile' | 'users' | 'reports' | 'usage' | 'permissions' | 'authSettings';
+export type OrgTab = 'dashboard' | 'profile' | 'users' | 'reports' | 'usage' | 'permissions' | 'authSettings';

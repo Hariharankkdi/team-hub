@@ -1,6 +1,6 @@
 import { OrgTab } from '@/types/organization';
 import { cn } from '@/lib/utils';
-import { LayoutGrid, Users, FileText, BarChart3, Shield, KeyRound } from 'lucide-react';
+import { LayoutDashboard, LayoutGrid, Users, FileText, BarChart3, Shield, KeyRound } from 'lucide-react';
 
 interface OrgTabsProps {
   activeTab: OrgTab;
@@ -8,6 +8,7 @@ interface OrgTabsProps {
 }
 
 const tabs: { id: OrgTab; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'profile', label: 'Profile', icon: LayoutGrid },
   { id: 'users', label: 'Users', icon: Users },
   { id: 'reports', label: 'Reports', icon: FileText },
