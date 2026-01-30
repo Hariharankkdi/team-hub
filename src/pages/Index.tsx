@@ -4,6 +4,7 @@ import { mockOrganizations } from '@/data/mockOrganizations';
 import { OrgHeader } from '@/components/org/OrgHeader';
 import { OrgProfileCard } from '@/components/org/OrgProfileCard';
 import { OrgTabs } from '@/components/org/OrgTabs';
+import { DashboardTab } from '@/components/org/DashboardTab';
 import { ProfileTab } from '@/components/org/ProfileTab';
 import { UsersTab } from '@/components/org/UsersTab';
 import { ReportsTab } from '@/components/org/ReportsTab';
@@ -18,7 +19,7 @@ import { toast } from 'sonner';
 const Index = () => {
   const [organizations, setOrganizations] = useState<Organization[]>(mockOrganizations);
   const [currentOrg, setCurrentOrg] = useState<Organization>(mockOrganizations[0]);
-  const [activeTab, setActiveTab] = useState<OrgTab>('profile');
+  const [activeTab, setActiveTab] = useState<OrgTab>('dashboard');
   const [changeOrgOpen, setChangeOrgOpen] = useState(false);
   const [createOrgOpen, setCreateOrgOpen] = useState(false);
   const [editProfileOpen, setEditProfileOpen] = useState(false);
@@ -76,6 +77,8 @@ const Index = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
+      case 'dashboard':
+        return <DashboardTab />;
       case 'profile':
         return <ProfileTab organization={currentOrg} onEditProfile={() => setEditProfileOpen(true)} />;
       case 'users':
